@@ -1,0 +1,24 @@
+{
+    "titles": {
+        "login": "Giriş",
+        "email": "Email adresi",
+        "emailPlaceholder": "Email giriniz",
+        "wontShareEmail": "Email adresiniz başkalarıyla kesinlikle paylaşılmayacaktır",
+        "password": "Şifre",
+        "passwordPlaceholder": "Şifre giriniz",
+        "footer": "Resumelk {year} © Tüm Hakları Saklıdır"
+    },
+    "actions": {
+        "login": "Giriş Yap",
+        "logout": "Çıkış Yap"
+    },
+    "formOptions": {
+        "skills": {
+            "1": "Temel",
+            "2": "Başlangıç",
+            "3": "Yetenekli",
+            "4": "Tecrübeli",
+            "5": "Uzman"
+        }
+    }
+}
