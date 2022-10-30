@@ -9,7 +9,7 @@
 
 <script>
 import {mapActions} from 'vuex'
-import Navbar from '@/components/layouts/Navbar.vue';
+import Navbar from '@/views/layouts/Navbar.vue';
 export default {
     name:"default-layout",
     components: {Navbar},

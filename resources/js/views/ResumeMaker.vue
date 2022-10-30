@@ -135,76 +135,20 @@
                 <!-- #professional summary# -->
 
                 <!-- employment history -->
-                <b-card-title class="my-4">{{ $t('İş Geçmişi') }}</b-card-title>
-                <b-card-text class="text-muted small">
-                    {{ 'İlgili deneyiminizi gösterin (son 10 yıl). Mümkünse başarılarınızı not etmek için madde işaretlerini kullanın - sayıları/gerçekleri kullanın' }}
-                </b-card-text>
-
-                <div  v-for="(job, index) in form.jobs" class="my-3">
-                    <b-row class="d-flex align-items-center">
-                        <b-col sm="11">
-                            <JobFormElement :job="job" :index="index" />
-                        </b-col>
-                        <b-col sm="1" @click.prevent="removeJob(index)">
-                            <i class="fas fa-trash text-warning" style="cursor: pointer"></i>
-                        </b-col>
-                    </b-row>
-                </div>
-
-                <div class="text-success" style="cursor: pointer" @click.prevent="addJob">
-                    <span>+</span> İş ekle
-                </div>
+                <EmploymentSection @change="updateSection" />
                 <!-- #employment history# -->
 
                 <!-- education history -->
-                <b-card-title class="my-4">{{ $t('Eğitim') }}</b-card-title>
-                <b-card-text class="text-muted small">
-                    {{ 'Özgeçmişinizde çeşitli bir eğitim, öğrendiklerinizin ve geçmişinizin işe getireceği değeri özetler.' }}
-                </b-card-text>
-
-                <div  v-for="(education, index) in form.educations" class="my-3">
-                    <b-row class="d-flex align-items-center">
-                        <b-col sm="11">
-                            <EducationFormElement :edu="education" :index="index" />
-                        </b-col>
-                        <b-col sm="1" @click.prevent="removeEducation(index)">
-                            <i class="fas fa-trash text-warning" style="cursor: pointer"></i>
-                        </b-col>
-                    </b-row>
-                </div>
-
-                <div class="text-success" style="cursor: pointer" @click.prevent="addEducation">
-                    <span>+</span> Eğitim ekle
-                </div>
+                <EducationSection @change="updateSection" />
                 <!-- #education history# -->
 
                 <!-- skills -->
-                <b-card-title class="my-4">{{ $t('Yetenekler') }}</b-card-title>
-                <b-card-text class="text-muted small">
-                    {{ 'Yeteneklerinizi göstermek için en önemli 5 beceriyi seçin! Çevrimiçi bir sistem üzerinden başvuruyorsanız, iş listesinin anahtar kelimeleriyle eşleştiğinden emin olun.' }}
-                </b-card-text>
+                <SkillSection @change="updateSection" />
+                <!-- #skills# -->
 
-                <div>
-                    <b-form-checkbox v-model="form.showSkillLevel" name="check-button" switch>
-                       <span class="small">Yetenek seviyelerini göster</span>
-                    </b-form-checkbox>
-                </div>
-
-                <div  v-for="(skill, index) in form.skills" class="my-3">
-                    <b-row class="d-flex align-items-center">
-                        <b-col sm="11">
-                            <SkillFormElement :skill="skill" :index="index" :showLevel="form.showSkillLevel" />
-                        </b-col>
-                        <b-col sm="1" @click.prevent="removeSkill(index)">
-                            <i class="fas fa-trash text-warning" style="cursor: pointer"></i>
-                        </b-col>
-                    </b-row>
-                </div>
-
-                <div class="text-success" style="cursor: pointer" @click.prevent="addSkill">
-                    <span>+</span> Yetenek ekle
-                </div>
-                <!-- #skillss# -->
+                <!-- languages -->
+                <LanguageSection @change="updateSection" />
+                <!-- #languages# -->
 
             </b-card>
         </b-col>
@@ -224,40 +168,30 @@
 import JobFormElement from '@/components/maker/JobFormElement.vue'
 import EducationFormElement from '@/components/maker/EducationFormElement.vue'
 import SkillFormElement from '@/components/maker/SkillFormElement.vue'
+import EducationSection from "@/components/maker/EducationSection.vue";
+import EmploymentSection from "@/components/maker/EmploymentSection.vue";
+import SkillSection from "@/components/maker/SkillSection.vue";
+import LanguageSection from "@/components/maker/LanguageSection.vue";
 
 export default {
     name: "ResumeMaker",
-    components: {SkillFormElement, EducationFormElement, JobFormElement},
+    components: {
+        EmploymentSection,
+        EducationSection,
+        SkillFormElement,
+        EducationFormElement,
+        JobFormElement,
+        SkillSection,
+        LanguageSection,
+    },
     data() {
         return {
             form: {
                 jobTitle: null,
-                jobs: [
-                    {
-                        title: 'Web Geliştirici',
-                        employer: 'Ödüyo',
-                        startDate: '2022-08-15',
-                        endDate: null,
-                        city: 'İstanbul',
-                        description: 'Lorem ipsum dolor sit amet falan filan.',
-                    }
-                ],
-                educations: [
-                    {
-                        degree: 'Rus Dili ve Edebiyatı',
-                        school: 'Anadolu Üniversitesi',
-                        startDate: '2013-09-01',
-                        endDate: '2016-06-01',
-                        license: 'Üniversite',
-                        description: 'Lorem ipsum dolor sit amet falan filan.',
-                    }
-                ],
-                skills: [
-                    { name: 'PHP', level: 5 },
-                    { name: 'Javascript', level: 5 },
-                    { name: 'MySQL', level: 4 },
-                ],
-                showSkillLevel: true,
+                jobs: [],
+                educations: [],
+                skills: [],
+                languages: [],
             },
         }
     },
@@ -266,44 +200,9 @@ export default {
             const { data } = await axios.get('/api/users')
             console.log(data)
         },
-        addJob() {
-            const job = {
-                title: null,
-                employer: null,
-                startDate: null,
-                endDate: null,
-                city: null,
-                description: null,
-            }
-            this.form.jobs = [ ...this.form.jobs, job ]
-        },
-        removeJob(index) {
-            this.form.jobs = this.form.jobs.filter((job, jobIdx) => jobIdx !== index)
-        },
-        addEducation() {
-            const education = {
-                degree: null,
-                school: null,
-                startDate: null,
-                endDate: null,
-                city: null,
-                description: null,
-            }
-            this.form.educations = [ ...this.form.educations, education ]
-        },
-        removeEducation(index) {
-            this.form.educations = this.form.educations.filter((education, educationIdx) => educationIdx !== index)
-        },
-        addSkill() {
-            const skill = {
-                name: null,
-                level: 1,
-            }
-            this.form.skills = [ ...this.form.skills, skill ]
-        },
-        removeSkill(index) {
-            this.form.skills = this.form.skills.filter((skill, skillIdx) => skillIdx !== index)
-        },
+        updateSection(section, data) {
+            this.form[section] = data
+        }
     },
     async mounted() {
         await this.getUsers()

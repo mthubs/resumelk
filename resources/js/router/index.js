@@ -2,17 +2,17 @@ import { createWebHistory, createRouter } from 'vue-router'
 import store from '@/store'
 
 /* Guest Component */
-const Login = () => import('@/components/Login.vue')
-const Register = () => import('@/components/Register.vue')
+const Login = () => import('@/views/Login.vue')
+const Register = () => import('@/views/Register.vue')
 /* Guest Component */
 
 /* Layouts */
-const DefaultLayout = () => import('@/components/layouts/Default.vue')
+const DefaultLayout = () => import('@/views/layouts/Default.vue')
 /* Layouts */
 
 /* Authenticated Component */
-const Dashboard = () => import('@/components/Dashboard.vue')
-const ResumeMaker = () => import('@/components/ResumeMaker.vue')
+const Dashboard = () => import('@/views/Dashboard.vue')
+const ResumeMaker = () => import('@/views/ResumeMaker.vue')
 /* Authenticated Component */
 
 
