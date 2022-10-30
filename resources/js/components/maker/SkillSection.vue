@@ -10,7 +10,7 @@
         </b-form-checkbox>
     </div>
 
-    <div  v-for="(skill, index) in skills" class="my-3">
+    <div  v-for="(skill, index) in skills" class="my-3" :key="Math.random() * 10000">
         <b-row class="d-flex align-items-center">
             <b-col sm="11">
                 <SkillFormElement :skill="skill" :index="index" :showLevel="showSkillLevel" />
@@ -48,7 +48,7 @@ export default {
         skills: {
             immediate: true,
             handler(skills) {
-                this.$emit('change', 'skills', skills)
+                this.$emit('update-section', 'skills', skills)
             }
         }
     },

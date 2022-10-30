@@ -4,7 +4,7 @@
         {{ 'Özgeçmişinizde çeşitli bir eğitim, öğrendiklerinizin ve geçmişinizin işe getireceği değeri özetler.' }}
     </b-card-text>
 
-    <div  v-for="(education, index) in educations" class="my-3">
+    <div  v-for="(education, index) in educations" class="my-3" :key="Math.random() * 10000">
         <b-row class="d-flex align-items-center">
             <b-col sm="11">
                 <EducationFormElement :edu="education" :index="index" />
@@ -45,7 +45,7 @@ export default {
         educations: {
             immediate: true,
             handler(educations) {
-                this.$emit('change', 'educations', educations)
+                this.$emit('update-section', 'educations', educations)
             }
         }
     },

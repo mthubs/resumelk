@@ -24,10 +24,10 @@
                     <b-form-group
                         :label="$t('Yetenek')"
                         label-class="text-muted fs-14"
-                        label-for="name"
+                        :label-for="`skill-name-${index}`"
                     >
                         <b-form-input
-                            id="name"
+                            :id="`skill-name-${index}`"
                             v-model="skill.name"
                             type="text"
                             required
@@ -39,13 +39,12 @@
                     <b-form-group
                         :label="$t('Seviye')"
                         label-class="text-muted fs-14"
-                        label-for="school"
+                        :label-for="`skill-level-${index}`"
                     >
                         <b-form-select
-                            id="level"
+                            :id="`skill-level-${index}`"
                             v-model="skill.level"
                             :options="skillOptions"
-                            type="text"
                             required
                             :disabled="!showLevel"
                         />

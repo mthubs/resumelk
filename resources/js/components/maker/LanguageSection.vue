@@ -1,7 +1,7 @@
 <template>
     <b-card-title class="my-4">{{ $t('Diller') }}</b-card-title>
 
-    <div  v-for="(language, index) in languages" class="my-3">
+    <div  v-for="(language, index) in languages" class="my-3" :key="Math.random() * 10000">
         <b-row class="d-flex align-items-center">
             <b-col sm="11">
                 <LanguageFormElement :language="language" :index="index" />
@@ -38,7 +38,7 @@ export default {
         languages: {
             immediate: true,
             handler(languages) {
-                this.$emit('change', 'languages', languages)
+                this.$emit('update-section', 'languages', languages)
             }
         }
     },

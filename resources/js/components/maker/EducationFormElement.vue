@@ -32,10 +32,10 @@
                     <b-form-group
                         :label="$t('Bölüm')"
                         label-class="text-muted fs-14"
-                        label-for="degree"
+                        :label-for="`edu-degree-${index}`"
                     >
                         <b-form-input
-                            id="degree"
+                            :id="`edu-degree-${index}`"
                             v-model="edu.degree"
                             type="text"
                             required
@@ -47,10 +47,10 @@
                     <b-form-group
                         :label="$t('Okul')"
                         label-class="text-muted fs-14"
-                        label-for="school"
+                        :label-for="`edu-school-${index}`"
                     >
                         <b-form-input
-                            id="school"
+                            :id="`edu-school-${index}`"
                             v-model="edu.school"
                             type="text"
                             required
@@ -65,10 +65,10 @@
                            <b-form-group
                                :label="$t('Başlangıç')"
                                label-class="text-muted fs-14"
-                               label-for="employer"
+                               :label-for="`edu-start-${index}`"
                            >
                                <b-form-input
-                                   id="employer"
+                                   :id="`edu-start-${index}`"
                                    v-model="edu.startDate"
                                    type="date"
                                    required
@@ -80,10 +80,10 @@
                            <b-form-group
                                :label="$t('Bitiş')"
                                label-class="text-muted fs-14"
-                               label-for="employer"
+                               :label-for="`edu-end-${index}`"
                            >
                                <b-form-input
-                                   id="employer"
+                                   :id="`edu-end-${index}`"
                                    v-model="edu.endDate"
                                    type="date"
                                    required
@@ -97,10 +97,10 @@
                     <b-form-group
                         :label="$t('Lisans Derecesi')"
                         label-class="text-muted fs-14"
-                        label-for="edu-license"
+                        :label-for="`edu-license-${index}`"
                     >
                         <b-form-input
-                            id="edu-license"
+                            :id="`edu-license-${index}`"
                             v-model="edu.license"
                             type="text"
                             required
@@ -112,10 +112,10 @@
                     <b-form-group
                         :label="$t('Açıklama')"
                         label-class="text-muted fs-14"
-                        label-for="edu-description"
+                        :label-for="`edu-desc-${index}`"
                     >
                         <b-form-textarea
-                            id="edu-description"
+                            :id="`edu-desc-${index}`"
                             v-model="edu.description"
                             :placeholder="$t('örn. Lorem ipsum dolor sit amet')"
                             rows="3"

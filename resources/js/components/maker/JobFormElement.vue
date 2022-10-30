@@ -32,10 +32,10 @@
                     <b-form-group
                         :label="$t('Ünvan')"
                         label-class="text-muted fs-14"
-                        label-for="title"
+                        :label-for="`job-section-title-${index}`"
                     >
                         <b-form-input
-                            id="title"
+                            :id="`job-section-title-${index}`"
                             v-model="job.title"
                             type="text"
                             required
@@ -47,10 +47,10 @@
                     <b-form-group
                         :label="$t('İşveren')"
                         label-class="text-muted fs-14"
-                        label-for="employer"
+                        :label-for="`job-employer-${index}`"
                     >
                         <b-form-input
-                            id="employer"
+                            :id="`job-employer-${index}`"
                             v-model="job.employer"
                             type="text"
                             required
@@ -65,10 +65,10 @@
                            <b-form-group
                                :label="$t('Başlangıç')"
                                label-class="text-muted fs-14"
-                               label-for="employer"
+                               :label-for="`job-start-${index}`"
                            >
                                <b-form-input
-                                   id="employer"
+                                   :id="`job-start-${index}`"
                                    v-model="job.startDate"
                                    type="date"
                                    required
@@ -80,10 +80,10 @@
                            <b-form-group
                                :label="$t('Bitiş')"
                                label-class="text-muted fs-14"
-                               label-for="employer"
+                               :label-for="`job-end-${index}`"
                            >
                                <b-form-input
-                                   id="employer"
+                                   :id="`job-end-${index}`"
                                    v-model="job.endDate"
                                    type="date"
                                    required
@@ -97,10 +97,10 @@
                     <b-form-group
                         :label="$t('Şehir')"
                         label-class="text-muted fs-14"
-                        label-for="job-city"
+                        :label-for="`job-city-${index}`"
                     >
                         <b-form-input
-                            id="job-city"
+                            :id="`job-city-${index}`"
                             v-model="job.city"
                             type="text"
                             required
@@ -112,10 +112,10 @@
                     <b-form-group
                         :label="$t('İş tanımı')"
                         label-class="text-muted fs-14"
-                        label-for="job-description"
+                        :label-for="`job-description-${index}`"
                     >
                         <b-form-textarea
-                            id="job-description"
+                            :id="`job-description-${index}`"
                             v-model="job.description"
                             :placeholder="$t('örn. Lorem ipsum dolor sit amet')"
                             rows="3"

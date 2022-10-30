@@ -14,7 +14,7 @@
                         >
                             <b-form-input
                                 id="job-title"
-                                v-model="form.jobTitle"
+                                v-model="formData.jobTitle"
                                 type="text"
                                 :placeholder="$t('örn. Öğretmen')"
                                 required
@@ -31,7 +31,7 @@
                         >
                             <b-form-input
                                 id="firstname"
-                                v-model="form.firstname"
+                                v-model="formData.firstname"
                                 type="text"
                                 :placeholder="$t('Ad')"
                                 required
@@ -47,7 +47,7 @@
                         >
                             <b-form-input
                                 id="lastname"
-                                v-model="form.lastname"
+                                v-model="formData.lastname"
                                 type="text"
                                 :placeholder="$t('Soyad')"
                                 required
@@ -63,7 +63,7 @@
                         >
                             <b-form-input
                                 id="email"
-                                v-model="form.email"
+                                v-model="formData.email"
                                 type="email"
                                 :placeholder="$t('Email adresi')"
                                 required
@@ -79,7 +79,7 @@
                         >
                             <b-form-input
                                 id="phone"
-                                v-model="form.phone"
+                                v-model="formData.phone"
                                 type="tel"
                                 :placeholder="$t('Telefon')"
                                 required
@@ -95,7 +95,7 @@
                         >
                             <b-form-input
                                 id="country"
-                                v-model="form.country"
+                                v-model="formData.country"
                                 type="tel"
                                 :placeholder="$t('Ülke')"
                                 required
@@ -111,7 +111,7 @@
                         >
                             <b-form-input
                                 id="city"
-                                v-model="form.city"
+                                v-model="formData.city"
                                 type="tel"
                                 :placeholder="$t('Şehir')"
                                 required
@@ -127,7 +127,7 @@
                     {{ 'Okuyucunun ilgisini çekecek 2-4 kısa ve enerjik cümle yazın! Rolünüzden, deneyiminizden ve en önemlisi - en büyük başarılarınızdan, en iyi niteliklerinizden ve becerilerinizden bahsedin.' }}
                 </b-card-text>
                 <b-form-textarea
-                    v-model="form.proSummary"
+                    v-model="formData.proSummary"
                     :placeholder="$t('örn. Geliştirici olarak 8 yıllık kariyerimde...')"
                     rows="3"
                     max-rows="6"
@@ -135,20 +135,25 @@
                 <!-- #professional summary# -->
 
                 <!-- employment history -->
-                <EmploymentSection @change="updateSection" />
+                <JobSection @update-section="updateSection" />
                 <!-- #employment history# -->
 
                 <!-- education history -->
-                <EducationSection @change="updateSection" />
+                <EducationSection @update-section="updateSection" />
                 <!-- #education history# -->
 
                 <!-- skills -->
-                <SkillSection @change="updateSection" />
+                <SkillSection @update-section="updateSection" />
                 <!-- #skills# -->
 
                 <!-- languages -->
-                <LanguageSection @change="updateSection" />
+                <LanguageSection @update-section="updateSection" />
                 <!-- #languages# -->
+                <!-- #skills# -->
+
+                <!-- links -->
+                <LinkSection @update-section="updateSection" />
+                <!-- #links# -->
 
             </b-card>
         </b-col>
@@ -169,29 +174,33 @@ import JobFormElement from '@/components/maker/JobFormElement.vue'
 import EducationFormElement from '@/components/maker/EducationFormElement.vue'
 import SkillFormElement from '@/components/maker/SkillFormElement.vue'
 import EducationSection from "@/components/maker/EducationSection.vue";
-import EmploymentSection from "@/components/maker/EmploymentSection.vue";
+import JobSection from "@/components/maker/JobSection.vue";
 import SkillSection from "@/components/maker/SkillSection.vue";
 import LanguageSection from "@/components/maker/LanguageSection.vue";
+import LinkSection from "@/components/maker/LinkSection.vue";
 
 export default {
     name: "ResumeMaker",
     components: {
-        EmploymentSection,
+        JobSection,
         EducationSection,
         SkillFormElement,
         EducationFormElement,
         JobFormElement,
         SkillSection,
         LanguageSection,
+        LinkSection,
     },
+    emits: ['update-section'],
     data() {
         return {
-            form: {
+            formData: {
                 jobTitle: null,
                 jobs: [],
                 educations: [],
                 skills: [],
                 languages: [],
+                links: [],
             },
         }
     },
@@ -201,7 +210,8 @@ export default {
             console.log(data)
         },
         updateSection(section, data) {
-            this.form[section] = data
+            console.log({ formData: this.formData })
+            this.formData[section] = data
         }
     },
     async mounted() {

@@ -2,33 +2,33 @@
     <b-card-header
         :class="visible ? null : 'collapsed'"
         :aria-expanded="visible ? 'true' : 'false'"
-        :aria-controls="`language-${index}`"
+        :aria-controls="`link-${index}`"
         @click="visible = !visible"
         class="cursor-pointer py-3"
     >
-        <div v-if="!language.name">{{ $t('(Belirtilmemiş)') }}</div>
+        <div v-if="!link.label">{{ $t('(Belirtilmemiş)') }}</div>
         <div class="d-flex align-items-center justify-content-between" v-else>
             <h6 class="mb-0">
-                {{ language.name }}
+                {{ link.label }}
             </h6>
             <div class="text-muted small">
-                {{ language.level }}
+                {{ link.address }}
             </div>
         </div>
     </b-card-header>
-    <b-collapse :id="`language-${index}`" v-model="visible">
+    <b-collapse :id="`link-${index}`" v-model="visible">
         <b-card>
             <b-row>
                 <!-- [name] -->
                 <b-col sm="6">
                     <b-form-group
-                        :label="$t('Dil')"
+                        :label="$t('Ad')"
                         label-class="text-muted fs-14"
-                        :label-for="`lang-name-${index}`"
+                        :label-for="`link-label-${index}`"
                     >
                         <b-form-input
-                            :id="`lang-name-${index}`"
-                            v-model="language.name"
+                           :id="`link-label-${index}`"
+                            v-model="link.label"
                             type="text"
                             required
                         ></b-form-input>
@@ -37,14 +37,14 @@
                 <!-- [level] -->
                 <b-col sm="6">
                     <b-form-group
-                        :label="$t('Seviye')"
+                        :label="$t('Link')"
                         label-class="text-muted fs-14"
-                        :label-for="`lang-level-${index}`"
+                        :label-for="`link-address-${index}`"
                     >
-                        <b-form-select
-                            :id="`lang-level-${index}`"
-                            v-model="language.level"
-                            :options="languageOptions"
+                        <b-form-input
+                           :id="`link-address-${index}`"
+                            v-model="link.address"
+                            type="text"
                             required
                         />
                     </b-form-group>
@@ -56,19 +56,11 @@
 
 <script>
 export default {
-    name: "LanguageFormElement",
-    props: { index: Number, language: Object },
+    name: "SkillFormElement",
+    props: { index: Number, link: Object },
     data() {
         return {
             visible: false,
-            languageOptions: [
-                { text: 'C2', value: 'C2' },
-                { text: 'C1', value: 'C1' },
-                { text: 'B2', value: 'B2' },
-                { text: 'B1', value: 'B1' },
-                { text: 'A2', value: 'A2' },
-                { text: 'A1', value: 'A1' },
-            ]
         }
     },
 }

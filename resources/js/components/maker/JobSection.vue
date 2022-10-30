@@ -4,7 +4,7 @@
         {{ 'İlgili deneyiminizi gösterin (son 10 yıl). Mümkünse başarılarınızı not etmek için madde işaretlerini kullanın - sayıları/gerçekleri kullanın' }}
     </b-card-text>
 
-    <div  v-for="(job, index) in jobs" class="my-3">
+    <div  v-for="(job, index) in jobs" class="my-3" :key="Math.random() * 10000">
         <b-row class="d-flex align-items-center">
             <b-col sm="11">
                 <JobFormElement :job="job" :index="index" />
@@ -23,7 +23,7 @@
 <script>
 import JobFormElement from '@/components/maker/JobFormElement.vue'
 export default {
-    name: "EmploymentSection",
+    name: "JobSection",
     components: {
         JobFormElement
     },
@@ -45,7 +45,7 @@ export default {
         jobs: {
             immediate: true,
             handler(jobs) {
-                this.$emit('change', 'jobs', jobs)
+                this.$emit('update-section', 'jobs', jobs)
             }
         }
     },
