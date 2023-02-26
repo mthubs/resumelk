@@ -66,10 +66,9 @@ export default {
         async login(){
             this.processing = true
             try {
-                await axios.get('/sanctum/csrf-cookie')
                 const { data } = await axios.post('/login',this.auth)
-                await this.signIn(data)
-                window.location.reload()
+                await this.signIn(data.user)
+                this.$router.push({name: 'dashboard'})
             } catch (e) {
                 console.log(e)
                 if(e.response.status===422) return this.validationErrors = e.response.data.errors

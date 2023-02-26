@@ -27,16 +27,19 @@ export default {
         async login({commit}, user = null){
             if (user) {
                 commit('SET_USER', user)
-                return commit('SET_AUTHENTICATED', true)
+                commit('SET_AUTHENTICATED', true)
+                return user
             }
 
             try {
                 const { data } = await axios.get('/api/user')
-                commit('SET_USER',data)
+                commit('SET_USER', data)
                 commit('SET_AUTHENTICATED', true)
+                return user
             } catch (e) {
                 commit('SET_USER',{})
                 commit('SET_AUTHENTICATED', false)
+                return null
             }
         },
         logout({commit}){

@@ -11,10 +11,29 @@ window.Popper = Popper
  */
 
 import axios from 'axios'
+import Swal from 'sweetalert2'
+
 window.axios = axios
+window.Swal = Swal
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true
+
+window.axios.interceptors.response.use(undefined, async function (error) {
+    switch (error.response.status) {
+        case 401:
+            window.localStorage.clear()
+            await Swal.fire({
+                title: 'Oturumunuz sonlanmış',
+                text: 'Tekrar giriş yapınız',
+                icon: 'error'
+            })
+            window.location.reload()
+            break
+        default:
+            return Promise.reject(error)
+    }
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

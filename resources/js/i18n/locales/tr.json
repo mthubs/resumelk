@@ -6,7 +6,9 @@
         "wontShareEmail": "Email adresiniz başkalarıyla kesinlikle paylaşılmayacaktır",
         "password": "Şifre",
         "passwordPlaceholder": "Şifre giriniz",
-        "footer": "Resumelk {year} © Tüm Hakları Saklıdır"
+        "footer": "Resumelk {year} © Tüm Hakları Saklıdır",
+        "dashboard": "Anasayfa",
+        "resume": "Özgeçmiş"
     },
     "actions": {
         "login": "Giriş Yap",

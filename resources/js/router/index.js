@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import store from '@/store'
+import i18n from '@/i18n'
 
 /* Guest Component */
 const Login = () => import('@/views/Login.vue')
@@ -7,7 +8,7 @@ const Register = () => import('@/views/Register.vue')
 /* Guest Component */
 
 /* Layouts */
-const DefaultLayout = () => import('@/views/layouts/Default.vue')
+const DefaultLayout = () => import('@/views/layouts/AuthLayout.vue')
 /* Layouts */
 
 /* Authenticated Component */
@@ -15,60 +16,43 @@ const Dashboard = () => import('@/views/Dashboard.vue')
 const ResumeMaker = () => import('@/views/ResumeMaker.vue')
 /* Authenticated Component */
 
-
 const routes = [
     {
-        name: "login",
-        path: "/login",
+        name: 'login',
+        path: '/login',
         component: Login,
         meta: {
-            middleware: "guest",
+            middleware: 'guest',
             title: 'titles.login',
         }
     },
     {
-        name: "register",
-        path: "/register",
+        name: 'register',
+        path: '/register',
         component: Register,
         meta: {
-            middleware: "guest",
+            middleware: 'guest',
             title: `Register`
         }
     },
     {
-        path: "/",
-        component: DefaultLayout,
+        name: 'dashboard',
+        path: '/',
+        component: Dashboard,
         meta: {
-            middleware: "auth"
+            middleware: 'auth',
+            title: `titles.dashboard`
         },
-        children: [
-            {
-                name: "dashboard",
-                path: '/',
-                component: Dashboard,
-                meta: {
-                    title: `titles.dashboard`
-                }
-            }
-        ]
     },
 
     {
-        path: "/resume/:id",
-        component: DefaultLayout,
+        name: 'resume-maker',
+        path: '/resume/:id',
+        component: ResumeMaker,
         meta: {
-            middleware: "auth"
-        },
-        children: [
-            {
-                name: 'resume-maker',
-                path: "/resume/:id",
-                component: ResumeMaker,
-                meta: {
-                    title: `titles.resumeMaker`
-                }
-            },
-        ]
+            middleware: 'auth',
+            title: `titles.resume`
+        }
     },
 ]
 
@@ -77,20 +61,14 @@ const router = createRouter({
     routes, // short for `routes: routes`
 })
 
-router.beforeEach((to, from, next) => {
-    document.title = to.meta.title
-    if (to.meta.middleware == "guest") {
-        if (store.state.auth.authenticated) {
-            next({ name: "dashboard" })
-        }
-        next()
-    } else {
-        if (store.state.auth.authenticated) {
-            next()
-        } else {
-            next({ name: "login" })
-        }
+router.beforeEach(async (to, from, next) => {
+    document.title = i18n.global.t(to.meta.title)
+    if (to.meta.middleware === 'guest') {
+        if (store.state.auth.authenticated) return next({name: 'dashboard'})
+        return next()
     }
+    next()
+
 })
 
 export default router

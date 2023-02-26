@@ -13,7 +13,10 @@
                     </p>
                     <hr class="my-4">
                     <p>{{ $t('Hemen bir özgeçmiş veya ön yazı oluşturarak başlayabilirsin.') }}</p>
-                    <b-button variant="outline-dark" class="me-1" size="lg" :href="`/resume/1`">{{ $t('ÖZGEÇMİŞ') }}</b-button>
+                    <router-link :to="`/resume/1`">
+                        <b-button variant="outline-dark" class="me-1" size="lg">{{ $t('ÖZGEÇMİŞ') }}</b-button>
+                    </router-link>
+
                     <b-button variant="outline-dark" size="lg">{{ $t('ÖN YAZI') }}</b-button>
                 </div>
             </b-card>
@@ -27,17 +30,9 @@ export default {
     name: "Dashboard",
     data() {
         return {
+            docTitle: 'wtf',
             user: this.$store.state.auth.user
         }
     },
-    methods: {
-        async getUsers() {
-            const { data } = await axios.get('/api/users')
-            console.log(data)
-        }
-    },
-    async mounted() {
-        await this.getUsers()
-    }
 }
 </script>
