@@ -15,9 +15,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+Route::get('{any}', [HomeController::class, 'index'])->where('any', '.*');
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');

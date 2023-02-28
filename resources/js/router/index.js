@@ -67,6 +67,7 @@ router.beforeEach(async (to, from, next) => {
         if (store.state.auth.authenticated) return next({name: 'dashboard'})
         return next()
     }
+    if (to.meta.middleware === 'auth' && !store.state.auth.authenticated) return next({ name: 'login' })
     next()
 
 })

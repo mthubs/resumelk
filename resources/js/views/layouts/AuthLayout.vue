@@ -11,7 +11,7 @@
 import {mapActions} from 'vuex'
 import Navbar from '@/views/layouts/Navbar.vue';
 export default {
-    name:"default-layout",
+    name: 'AuthLayout',
     components: {Navbar},
     data(){
         return {
@@ -19,15 +19,15 @@ export default {
         }
     },
     methods:{
-        ...mapActions({
-            signOut:"auth/logout"
-        }),
+        ...mapActions({ signOut: 'auth/logout' }),
         async logout(){
-            await axios.post('/logout').then(({data})=>{
-                this.signOut()
-                this.$router.push({name:"login"})
-            })
+            await axios.post('/logout')
+            this.signOut()
+            this.$router.push({ name: 'login' })
         }
+    },
+    async created() {
+
     }
 }
 </script>
