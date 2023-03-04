@@ -1,3 +1,9 @@
+:root {
+    --re-orange: #ffa785;
+    --re-black: #393548;
+    --re-deep-orange: #ef6C00;
+}
+
 body {
     background-color: #f0f0f0 !important;
     /*background-color: #fff0ce !important;*/
@@ -18,4 +24,15 @@ body {
 
 .fs-14 {
     font-size: 14px !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: 0.2s !important;
+}
+
+a:hover {
+    color: var(--re-deep-orange) !important;
+    transition: 0.2s;
 }

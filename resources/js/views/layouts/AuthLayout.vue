@@ -10,6 +10,7 @@
 <script>
 import {mapActions} from 'vuex'
 import Navbar from '@/views/layouts/Navbar.vue'
+
 export default {
     name: 'AuthLayout',
     components: {Navbar},

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ResumeController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('users', [UsersController::class, 'users'])->middleware('auth:sanctum');
+Route::get('/resumes', [ResumeController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/resume/{resume}', [ResumeController::class, 'show'])->middleware('auth:sanctum');
+Route::post('/resume', [ResumeController::class, 'create'])->middleware('auth:sanctum');
+Route::delete('/resume/{resume}', [ResumeController::class, 'destroy'])->middleware('auth:sanctum');

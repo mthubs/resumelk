@@ -15,7 +15,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('{any}', [HomeController::class, 'index'])->where('any', '.*');
+Route::get('/{any}', [HomeController::class, 'index'])->where('any', '^((?!api).)*');
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');

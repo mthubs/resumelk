@@ -86,17 +86,17 @@ export default {
 
 <style scoped>
     #login-button {
-        background-color: #393548 !important;
-        border-color: #393548 !important;
+        background-color: var(--re-black) !important;
+        border-color: var(--re-black) !important;
     }
 
     h4, label {
-        color: #393548 !important;
+        color: var(--re-black) !important;
     }
 
     .card {
-        background-color: #ffa785 !important;
-        border-color: #ffa785 !important;
+        background-color: var(--re-orange) !important;
+        border-color: var(--re-orange) !important;
     }
 
     section {

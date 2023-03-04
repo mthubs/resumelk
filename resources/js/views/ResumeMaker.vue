@@ -1,6 +1,7 @@
 <template>
     <b-row class="mb-3">
         <b-col sm="6" style="height: 80vh; overflow-y: scroll">
+            <h2 class="mb-4 text-center">{{ formData.title }}</h2>
             <b-card class="pb-5">
                 <!-- personal info -->
                 <b-card-title class="mb-4">{{ $t('Kişisel Bilgiler') }}</b-card-title>
@@ -205,9 +206,13 @@ export default {
         }
     },
     methods: {
-        async getUsers() {
-            const { data } = await axios.get('/api/users')
-            console.log(data)
+        async getResume() {
+            await this.$router.isReady()
+            const { data } = await axios.get(`/api/resume/${this.$route.params.id}`)
+            this.formData = {
+                ...this.formData,
+                ...data,
+            }
         },
         updateSection(section, data) {
             console.log({ formData: this.formData })
@@ -215,7 +220,7 @@ export default {
         }
     },
     async mounted() {
-        await this.getUsers()
+        await this.getResume()
     }
 }
 </script>

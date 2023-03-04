@@ -40,11 +40,11 @@ export default {
 
 <style scoped>
     #navbar {
-        background-color: #ffa886 !important;
+        background-color: var(--re-orange) !important;
     }
 
     #brand, #user {
-        color: #393548 !important;
+        color: var(--re-black) !important;
     }
 
     #user {

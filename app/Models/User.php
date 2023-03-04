@@ -43,11 +43,16 @@ class User extends Authenticatable
 
     public function userDetail(): HasOne
     {
-        $this->hasOne(UserDetail::class);
+        return $this->hasOne(UserDetail::class);
     }
 
     public function resumes(): HasMany
     {
         return $this->hasMany(Resume::class);
+    }
+
+    public function resumesByLatestUpdated(): HasMany
+    {
+        return $this->hasMany(Resume::class)->orderBy('updated_at', 'desc');
     }
 }

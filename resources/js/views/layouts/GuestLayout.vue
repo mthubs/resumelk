@@ -4,10 +4,6 @@
 
 <script>
 export default {
-    name:"GuestLayout",
-    data(){
-        return {}
-    },
-    methods:{}
+    name: 'GuestLayout',
 }
 </script>
