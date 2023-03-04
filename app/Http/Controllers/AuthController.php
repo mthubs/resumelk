@@ -16,7 +16,7 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json([
                 'message' => __('Girilen bilgiler hatalı')
-            ], 401);
+            ], 400);
         }
 
         $attempt = Auth::attempt($request->only('email', 'password'));
@@ -24,7 +24,7 @@ class AuthController extends Controller
         if (!$attempt) {
             return response()->json([
                 'message' => __('Girilen bilgiler hatalı')
-            ], 401);
+            ], 400);
         }
 
         return response()->json([

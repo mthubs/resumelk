@@ -47,12 +47,14 @@
 
 <script>
 import { mapActions } from 'vuex'
+import axios from 'axios'
+
 export default {
     name: "Login",
     data(){
         return {
             auth:{
-                email: 'mtepeau@gmail.com',
+                email: 'test@example.com',
                 password: 'Test1234*',
             },
             validationErrors:{},

@@ -30,7 +30,6 @@ export default {
                 commit('SET_AUTHENTICATED', true)
                 return user
             }
-
             try {
                 const { data } = await axios.get('/api/user')
                 commit('SET_USER', data)
